@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EcoCommit Dashboard</title>
+
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet" href="navbar.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<div id="navbar-container"></div>
+
+<main class="container">
+
+<h1>Impact Dashboard</h1>
+<p class="subtitle">Track your environmental impact in real-time</p>
+
+
+<section class="stats">
+
+<div class="stat">
+<i data-lucide="trending-down"></i>
+<span>Daily CO₂ Saved</span>
+<h2 class="count" data-target="2.4" data-suffix=" kg">0</h2>
+</div>
+
+<div class="stat">
+<i data-lucide="leaf"></i>
+<span>Monthly CO₂ Saved</span>
+<h2 class="count" data-target="48.2" data-suffix=" kg">0</h2>
+</div>
+
+<div class="stat">
+<i data-lucide="tree-pine"></i>
+<span>Trees Equivalent</span>
+<h2 class="count" data-target="12">0</h2>
+</div>
+
+<div class="stat">
+<i data-lucide="dollar-sign"></i>
+<span>Money Saved</span>
+<h2 class="count" data-target="386" data-prefix="$">0</h2>
+</div>
+
+<div class="stat">
+<i data-lucide="star"></i>
+<span>EcoPoints</span>
+<h2 class="count" data-target="2540">0</h2>
+</div>
+
+</section>
+
+
+<section class="grid">
+
+
+<div class="card">
+
+<h3><i data-lucide="zap"></i> Track Your Transport</h3>
+
+<div class="transport">
+<button class="tbtn active" data-mode="Walk">Walk</button>
+<button class="tbtn" data-mode="Bus">Bus</button>
+<button class="tbtn" data-mode="Bike">Bike</button>
+<button class="tbtn" data-mode="Car">Car</button>
+</div>
+
+<div class="goalBox">
+<label>Today's Distance Goal (km)</label>
+<input id="goalInput" type="number" min="0" step="0.1" value="5">
+</div>
+
+<p class="distance">
+Progress: <b id="progressKm">0.00</b> /
+<b id="goalDisplay">5</b> km
+</p>
+
+<input id="range" type="range" min="0" max="100" value="0" disabled>
+
+<button id="trackBtn" class="submit">Start Tracking</button>
+
+<hr>
+
+<h4 class="pledgeTitle">
+<i data-lucide="snowflake"></i>
+No-AC Day Pledge
+</h4>
+
+<div class="pledgeCard">
+🌿 I Used No AC Today
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3><i data-lucide="brain"></i> AI Engine</h3>
+
+<ul class="ai">
+<li>Activity Classification <span class="done">✓ Complete</span></li>
+<li>Carbon Calculator <span class="done">✓ Complete</span></li>
+<li>Impact Predictor <span id="predict" class="loading">Analyzing…</span></li>
+<li>Recommendation Engine <span class="done">✓ Complete</span></li>
+</ul>
+
+<div class="aiBox">
+Switching to bus twice a week can reduce your yearly emissions by 18%.
+Your walking habit already saves ~2.1 kg CO₂ daily.
+</div>
+
+</div>
+
+</section>
+
+
+<section class="charts">
+
+<div class="chartCard">
+<h4>Weekly Carbon Reduction</h4>
+<canvas id="lineChart"></canvas>
+</div>
+
+<div class="chartCard">
+<h4>Activity Distribution</h4>
+<canvas id="pieChart"></canvas>
+</div>
+
+<div class="chartCard">
+<h4>Monthly Progress</h4>
+<canvas id="barChart"></canvas>
+</div>
+
+<div class="chartCard">
+<h4>Platform Impact Growth</h4>
+<canvas id="areaChart"></canvas>
+</div>
+
+</section>
+
+
+<section class="future">
+
+<h3><i data-lucide="brain"></i> AI Future Impact Analysis</h3>
+
+<p class="futureSub">
+Real-time projected impact based on platform data
+</p>
+
+<div class="futureCards">
+
+<div class="fCard green">
+<h2 id="co2">29</h2>
+<span>Tons CO₂ Reduced / Year</span>
+</div>
+
+<div class="fCard blue">
+<h2 id="aqi">3</h2>
+<span>AQI Points Improved</span>
+</div>
+
+<div class="fCard gold">
+<h2 id="fuel">$13,872</h2>
+<span>Fuel Savings</span>
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="dashboard.js"></script>
+<script src="navbar.js"></script>
+
+</body>
+</html>
