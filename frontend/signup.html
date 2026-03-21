@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up - EcoCommit AI</title>
+
+<link rel="stylesheet" href="navbar.css">
+<link rel="stylesheet" href="signup.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="navbar-container"></div>
+
+<div class="auth-container">
+    <h2>Create Account</h2>
+
+    <input type="text" id="fullName" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+    <!-- Country Dropdown -->
+    <div class="dropdown-group">
+        <input type="text" id="country" placeholder="Select Country" autocomplete="off">
+        <div class="dropdown-list" id="countryList"></div>
+    </div>
+
+    <!-- City Dropdown -->
+    <div class="dropdown-group">
+        <input type="text" id="city" placeholder="Select City" autocomplete="off" disabled>
+        <div class="dropdown-list" id="cityList"></div>
+    </div>
+
+    <button id="signupBtn">Create Account</button>
+
+    <div class="switch">
+        Already have an account? <a href="login.html">Login</a>
+    </div>
+</div>
+
+<script src="navbar.js"></script>
+<script src="signup.js"></script>
+
+</body>
+</html>

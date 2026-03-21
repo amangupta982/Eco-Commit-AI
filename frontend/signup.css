@@ -1,0 +1,85 @@
+body{
+    font-family: 'Inter', sans-serif;
+    background:#eef3f1;
+    margin:0;
+}
+
+.auth-container{
+    max-width:400px;
+    margin:120px auto;
+    background:white;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.auth-container h2{
+    margin-bottom:20px;
+}
+
+.auth-container input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+.auth-container button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(90deg,#2e7d32,#1565c0);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.switch{
+    margin-top:15px;
+    text-align:center;
+}
+
+.switch a{
+    color:#1565c0;
+    text-decoration:none;
+}
+
+/* ===== Country & City Dropdown ===== */
+
+.dropdown-group{
+    position:relative;
+}
+
+.dropdown-list{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    max-height:220px;
+    overflow-y:auto;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:8px;
+    display:none;
+    z-index:10;
+}
+
+.dropdown-item{
+    padding:10px 12px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.dropdown-item:hover{
+    background:#f1f5f4;
+}
+/* Arrow Icon */
+.dropdown-group input{
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    background-size:14px;
+    cursor:pointer;
+}

@@ -1,0 +1,47 @@
+body{
+    font-family: 'Inter', sans-serif;
+    background:#eef3f1;
+    margin:0;
+}
+
+.auth-container{
+    max-width:400px;
+    margin:120px auto;
+    background:white;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.auth-container h2{
+    margin-bottom:20px;
+}
+
+.auth-container input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border:1px solid #ddd;
+}
+
+.auth-container button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(90deg,#2e7d32,#1565c0);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.switch{
+    margin-top:15px;
+    text-align:center;
+}
+
+.switch a{
+    color:#1565c0;
+    text-decoration:none;
+}
