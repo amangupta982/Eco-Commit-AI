@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ═══════════════════════════════════════
+   NAVBAR BASE
+═══════════════════════════════════════ */
+.main-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 36px;
+  margin: 12px 20px 0;
+  border-radius: 18px;
+  position: sticky;
+  top: 12px;
+  z-index: 1000;
+
+  /* Glassmorphism */
+  background: rgba(237, 245, 241, 0.72);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 8px 32px rgba(46, 125, 50, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+
+  /* Scroll shrink transition */
+  transition:
+    padding 0.4s cubic-bezier(0.4,0,0.2,1),
+    margin 0.4s cubic-bezier(0.4,0,0.2,1),
+    border-radius 0.4s cubic-bezier(0.4,0,0.2,1),
+    background 0.4s ease,
+    box-shadow 0.4s ease,
+    backdrop-filter 0.4s ease;
+
+  /* Entrance animation */
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: navbarEnter 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards;
+}
+
+@keyframes navbarEnter {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SCROLL SHRINK state ── */
+.main-navbar.scrolled {
+  padding: 8px 28px;
+  margin: 6px 16px 0;
+  border-radius: 14px;
+  background: rgba(237, 245, 241, 0.92);
+  backdrop-filter: blur(28px) saturate(2);
+  -webkit-backdrop-filter: blur(28px) saturate(2);
+  box-shadow:
+    0 12px 40px rgba(46, 125, 50, 0.13),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+/* ═══════════════════════════════════════
+   LOGO — animated bounce + spin on load
+═══════════════════════════════════════ */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-box {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, #2e7d32, #1f4fa3);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.3);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  animation: logoBounce 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.3s both;
+  overflow: hidden;
+}
+
+@keyframes logoBounce {
+  0%   { opacity:0; transform: scale(0.4) rotate(-20deg); }
+  60%  { transform: scale(1.15) rotate(8deg); }
+  100% { opacity:1; transform: scale(1) rotate(0deg); }
+}
+
+.logo-box:hover {
+  transform: scale(1.1) rotate(-8deg);
+  box-shadow: 0 8px 24px rgba(46, 125, 50, 0.4);
+}
+
+.logo-leaf {
+  font-size: 19px;
+  display: block;
+  animation: leafSpin 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.3s both;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes leafSpin {
+  from { transform: rotate(-180deg) scale(0); }
+  to   { transform: rotate(0deg)   scale(1); }
+}
+
+.logo-box:hover .logo-leaf { transform: rotate(20deg) scale(1.1); }
+
+.logo-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700; font-size: 17px;
+  color: #1e2c28; letter-spacing: -0.3px;
+  opacity: 0; transform: translateX(-8px);
+  animation: fadeSlideIn 0.6s ease 0.5s forwards;
+}
+
+/* ═══════════════════════════════════════
+   NAV LINKS — pill switcher + stagger
+═══════════════════════════════════════ */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  margin-right: 20px;
+  position: relative;
+  background: rgba(46,125,50,0.06);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+/* Sliding pill indicator */
+.nav-pill-indicator {
+  position: absolute;
+  height: calc(100% - 8px);
+  background: white;
+  border-radius: 9px;
+  box-shadow: 0 2px 12px rgba(46,125,50,0.12);
+  transition: left 0.35s cubic-bezier(0.34,1.56,0.64,1),
+              width 0.35s cubic-bezier(0.34,1.56,0.64,1),
+              opacity 0.3s ease;
+  pointer-events: none;
+  top: 4px;
+  opacity: 0;
+  z-index: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4a5e58;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14.5px;
+  padding: 7px 16px;
+  border-radius: 9px;
+  position: relative;
+  z-index: 1;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+
+  /* Stagger entrance — set via JS */
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.nav-link.link-visible {
+  animation: linkStagger 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+@keyframes linkStagger {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Active state */
+.nav-link.active {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+/* ── GRADIENT HOVER UNDERLINE ── */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, #2e7d32, #1f4fa3);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.nav-link:hover::after { transform: scaleX(1); }
+.nav-link.active::after { transform: scaleX(1); opacity: 0.5; }
+.nav-link:hover { color: #2e7d32; }
+
+/* ═══════════════════════════════════════
+   AUTH SECTION
+═══════════════════════════════════════ */
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeSlideIn 0.6s ease 0.7s forwards;
+}
+
+/* ── CTA BUTTON ── */
+.nav-btn {
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  cursor: none;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.green-outline {
+  background: transparent;
+  border: 1.5px solid rgba(46,125,50,0.4);
+  color: #2e7d32;
+}
+.green-outline:hover {
+  background: rgba(46,125,50,0.06);
+  border-color: #2e7d32;
+  transform: translateY(-1px);
+}
+
+.green-fill {
+  background: linear-gradient(90deg, #2e7d32, #1f4fa3);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 14px rgba(46,125,50,0.28);
+}
+.green-fill:hover {
+  box-shadow: 0 8px 24px rgba(46,125,50,0.4);
+  transform: translateY(-2px);
+}
+
+/* Shimmer on CTA fill button */
+.green-fill::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.green-fill:hover::after { transform: translateX(100%); }
+
+/* ── USER AVATAR CHIP ── */
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(46,125,50,0.08);
+  border: 1px solid rgba(46,125,50,0.15);
+  border-radius: 100px;
+  padding: 5px 14px 5px 5px;
+  cursor: none;
+  transition: all 0.3s ease;
+  animation: chipEntrance 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.8s both;
+}
+
+@keyframes chipEntrance {
+  from { opacity:0; transform:scale(0.8) translateX(20px); }
+  to   { opacity:1; transform:scale(1)   translateX(0); }
+}
+
+.user-chip:hover {
+  background: rgba(46,125,50,0.13);
+  border-color: rgba(46,125,50,0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(46,125,50,0.12);
+}
+
+.user-avatar {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #2e7d32, #1f4fa3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  flex-shrink: 0;
+}
+
+.user-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: #1e2c28; max-width: 90px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.user-eco-pts {
+  font-size: 11px; font-weight: 600;
+  color: #2e7d32; letter-spacing: 0.2px;
+}
+
+/* EcoPoints badge inside chip */
+.eco-pts-badge {
+  background: linear-gradient(90deg, #2e7d32, #1f4fa3);
+  color: white; font-size: 10px; font-weight: 700;
+  padding: 2px 8px; border-radius: 100px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.3px;
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(46,125,50,0.4); }
+  50%     { box-shadow: 0 0 0 4px rgba(46,125,50,0); }
+}
+
+/* ── SIGN IN / SIGN UP on non-logged pages ── */
+.sign-in-btn {
+  background: transparent;
+  border: 1.5px solid rgba(46,125,50,0.35);
+  color: #2e7d32;
+  padding: 7px 18px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 14px;
+  cursor: none;
+  transition: all 0.3s ease;
+}
+.sign-in-btn:hover {
+  background: rgba(46,125,50,0.06);
+  border-color: #2e7d32;
+  transform: translateY(-1px);
+}
+
+.sign-up-btn {
+  background: linear-gradient(90deg,#2e7d32,#1f4fa3);
+  color: white; border: none;
+  padding: 8px 20px; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 14px;
+  cursor: none;
+  box-shadow: 0 4px 14px rgba(46,125,50,0.28);
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.sign-up-btn::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  transform:translateX(-100%); transition:transform 0.5s ease;
+}
+.sign-up-btn:hover::after { transform:translateX(100%); }
+.sign-up-btn:hover {
+  box-shadow: 0 8px 24px rgba(46,125,50,0.4);
+  transform: translateY(-2px);
+}
+
+/* ── RIPPLE ── */
+.nav-ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(46,125,50,0.15);
+  transform: scale(0);
+  animation: navRipple 0.5s linear;
+  pointer-events: none;
+}
+@keyframes navRipple { to { transform:scale(4); opacity:0; } }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeSlideIn {
+  from { opacity:0; transform:translateX(-8px); }
+  to   { opacity:1; transform:translateX(0); }
+}
