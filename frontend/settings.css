@@ -1,0 +1,177 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#eef3ef;
+  color:#1f2d2a;
+}
+
+.settings-container{
+  width:50%;
+  margin:60px auto;
+}
+
+.settings-card{
+  background:white;
+  border-radius:18px;
+  padding:30px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.setting-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+  border-bottom:1px solid #eee;
+}
+
+.switch{
+  position:relative;
+  display:inline-block;
+  width:45px;
+  height:24px;
+}
+
+.switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.slider{
+  position:absolute;
+  cursor:pointer;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#ccc;
+  border-radius:24px;
+  transition:0.3s;
+}
+
+.slider:before{
+  position:absolute;
+  content:"";
+  height:18px;
+  width:18px;
+  left:3px;
+  bottom:3px;
+  background:white;
+  border-radius:50%;
+  transition:0.3s;
+}
+
+input:checked + .slider{
+  background:#2e7d32;
+}
+
+input:checked + .slider:before{
+  transform:translateX(21px);
+}
+
+.danger-zone{
+  margin-top:25px;
+  text-align:center;
+}
+
+#logoutBtn{
+  padding:12px 24px;
+  background:#c62828;
+  border:none;
+  color:white;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* DARK MODE */
+body.dark{
+  background:#111417;
+  color:#e5e7eb;
+}
+
+body.dark .settings-card{
+  background:#1a1f24;
+}
+
+body.dark .setting-row{
+  border-bottom:1px solid #2b3238;
+}
+.section-title{
+  font-size:14px;
+  font-weight:600;
+  margin:25px 0 15px;
+  color:#2c3e3a;
+}
+
+.setting-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+}
+
+.input-field{
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid #dcdcdc;
+  background:#f9faf9;
+  font-family:'Poppins',sans-serif;
+}
+
+.action-btn{
+  padding:8px 14px;
+  border-radius:8px;
+  border:none;
+  background:#2e7d32;
+  color:white;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.action-btn:hover{
+  opacity:0.9;
+}
+
+hr{
+  border:none;
+  border-top:1px solid #e5e5e5;
+  margin:10px 0;
+}
+
+.danger-text{
+  color:#b71c1c;
+}
+
+.danger-zone{
+  display:flex;
+  gap:15px;
+  margin-top:15px;
+}
+
+#logoutBtn{
+  background:#c62828;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.delete-btn{
+  background:white;
+  color:#c62828;
+  border:1px solid #c62828;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.delete-btn:hover{
+  background:#ffecec;
+}

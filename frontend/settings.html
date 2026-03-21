@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings - EcoCommit AI</title>
+
+<link rel="stylesheet" href="settings.css">
+<link rel="stylesheet" href="navbar.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="navbar-container"></div>
+
+<main class="settings-container">
+
+  <h2>Settings</h2>
+
+  <div class="settings-card">
+
+    <!-- ACCOUNT -->
+    <div class="section-title">Account</div>
+
+    <div class="setting-row">
+      <span>Full Name</span>
+      <input type="text" value="Alex Rivera" class="input-field">
+    </div>
+
+    <div class="setting-row">
+      <span>Email</span>
+      <input type="email" value="alex@email.com" class="input-field">
+    </div>
+
+    <div class="setting-row">
+      <span>Password</span>
+      <button class="action-btn">Change Password</button>
+    </div>
+
+    <hr>
+
+    <!-- PRIVACY -->
+    <div class="section-title">Privacy</div>
+
+    <div class="setting-row">
+      <span>Account Visibility</span>
+      <select class="input-field">
+        <option>Public</option>
+        <option>Private</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <span>Activity Status</span>
+      <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <hr>
+
+    <!-- NOTIFICATIONS -->
+    <div class="section-title">Notifications</div>
+
+    <div class="setting-row">
+      <span>Email Notifications</span>
+      <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <span>Reward Alerts</span>
+      <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <hr>
+
+    <!-- SECURITY -->
+    <div class="section-title">Security</div>
+
+    <div class="setting-row">
+      <span>Login Activity</span>
+      <button class="action-btn">View Sessions</button>
+    </div>
+
+    <div class="setting-row">
+      <span>Two-Factor Authentication</span>
+      <button class="action-btn">Enable</button>
+    </div>
+
+    <hr>
+
+    <!-- DANGER ZONE -->
+    <div class="section-title danger-text">Danger Zone</div>
+
+    <div class="danger-zone">
+      <button id="logoutBtn">Logout</button>
+      <button class="delete-btn">Delete Account</button>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="settings.js"></script>
+<script src="navbar.js"></script>
+</body>
+</html>

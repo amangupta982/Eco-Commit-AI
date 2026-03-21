@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Travel Vouchers</title>
+
+<link rel="stylesheet" href="navbar.css">
+<link rel="stylesheet" href="vouchers.css">
+
+</head>
+
+<body>
+
+<div id="navbar-container"></div>
+
+<main class="container">
+
+<h1>Travel Vouchers</h1>
+
+<section class="grid">
+
+<div class="card">
+<h3>Flight Voucher</h3>
+<p>$50 discount</p>
+<p>Cost: 2000 EcoPoints</p>
+<button onclick="claimVoucher(2000)">Claim</button>
+</div>
+
+<div class="card">
+<h3>Train Discount</h3>
+<p>$20 discount</p>
+<p>Cost: 1000 EcoPoints</p>
+<button onclick="claimVoucher(1000)">Claim</button>
+</div>
+
+<div class="card">
+<h3>Metro Pass</h3>
+<p>Cost: 700 EcoPoints</p>
+<button onclick="claimVoucher(700)">Claim</button>
+</div>
+
+</section>
+
+</main>
+
+<script src="vouchers.js"></script>
+<script src="navbar.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+body{
+background:#eef3ef;
+font-family:Inter,sans-serif;
+}
+
+.container{
+width:1000px;
+margin:40px auto;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+button{
+margin-top:10px;
+padding:10px 14px;
+border:none;
+border-radius:10px;
+background:#2e7d32;
+color:white;
+cursor:pointer;
+}

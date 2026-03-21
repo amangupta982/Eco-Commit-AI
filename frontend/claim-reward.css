@@ -1,0 +1,46 @@
+body{
+background:#eef3ef;
+font-family:Inter,sans-serif;
+margin:0;
+}
+
+.container{
+width:1100px;
+margin:40px auto;
+}
+
+.pointsCard{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+margin-bottom:30px;
+}
+
+.pointsCard h2{
+font-size:36px;
+color:#2e7d32;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.card button{
+margin-top:15px;
+padding:10px 16px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#2e7d32,#1f4fa3);
+color:white;
+cursor:pointer;
+}
