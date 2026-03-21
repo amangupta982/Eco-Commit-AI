@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rewards & Gamification</title>
+
+<link rel="stylesheet" href="rewards.css">
+<link rel="stylesheet" href="navbar.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+<div id="navbar-container"></div>
+
+<main class="container">
+
+<h1>Rewards & Gamification</h1>
+
+<!-- ECO POINTS -->
+<section class="card ecoPoints">
+
+<div class="ecoLeft">
+
+<h3><i data-lucide="star"></i> EcoPoints Balance</h3>
+
+<h2 id="points">0</h2>
+<p>460 points to next badge</p>
+
+<div class="progress">
+<div class="progressFill"></div>
+</div>
+
+<button class="claimBtn" onclick="window.location.href='claim-reward.html'">
+🎁 Claim Reward
+</button>
+
+</div>
+
+<div class="ecoRight" id="calendar"></div>
+
+</section>
+
+
+<!-- LEADERBOARD -->
+<section class="card leaderboard">
+
+<div class="leaderHeader">
+
+<h3><i data-lucide="trophy"></i> Leaderboard</h3>
+
+<select id="leaderFilter">
+<option value="city">City</option>
+<option value="state">State</option>
+<option value="country">Country</option>
+<option value="global">Global</option>
+</select>
+
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>Rank</th>
+<th>User</th>
+<th id="locationHeader">City</th>
+<th>Points</th>
+</tr>
+</thead>
+
+<tbody id="leaderboardBody">
+
+<tr>
+<td>🥇</td>
+<td>Priya S.</td>
+<td>Mumbai</td>
+<td>4,200</td>
+</tr>
+
+<tr>
+<td>🥈</td>
+<td>Carlos M.</td>
+<td>Madrid</td>
+<td>3,850</td>
+</tr>
+
+<tr class="you">
+<td>🥉</td>
+<td>Alex R. <span>(You)</span></td>
+<td>San Francisco</td>
+<td>2,540</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>Yuki T.</td>
+<td>Tokyo</td>
+<td>2,310</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>Emma L.</td>
+<td>Berlin</td>
+<td>2,100</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+
+<!-- CERTIFICATE -->
+<section class="card certificate">
+
+<h3><i data-lucide="award"></i> Green Certificate</h3>
+
+<p>
+Generate a verified climate action certificate for your contributions.
+</p>
+
+<button class="generate">
+<i data-lucide="sparkles"></i>
+Generate Climate Certificate
+</button>
+
+</section>
+
+</main>
+
+<script src="rewards.js"></script>
+<script src="navbar.js"></script>
+
+</body>
+</html>

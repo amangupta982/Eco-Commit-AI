@@ -1,0 +1,203 @@
+:root{
+--bg:#eef3ef;
+--card:#ffffff;
+--green:#2e7d32;
+--blue:#1f4fa3;
+--shadow:0 8px 24px rgba(0,0,0,.06);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,sans-serif;
+}
+
+body{
+background:var(--bg);
+color:#1f2d2a;
+}
+
+/* NAVBAR */
+
+/* LAYOUT */
+.container{
+width:1050px;
+margin:30px auto;
+}
+
+.card{
+background:var(--card);
+padding:28px;
+border-radius:18px;
+box-shadow:var(--shadow);
+margin-bottom:26px;
+}
+
+/* ECO POINTS */
+.ecoPoints{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.ecoLeft h2{
+font-size:38px;
+margin:10px 0;
+}
+
+.progress{
+height:10px;
+background:#dde6e2;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.progressFill{
+height:100%;
+width:70%;
+background:linear-gradient(90deg,var(--green),var(--blue));
+}
+
+/* calendar */
+.ecoRight{
+display:grid;
+grid-template-columns:repeat(7,32px);
+gap:8px;
+}
+
+.day{
+width:32px;
+height:32px;
+border-radius:8px;
+background:#e6efe9;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+color:#3b5b47;
+}
+
+.day.active{
+background:#c8e6c9;
+}
+
+/* LEADERBOARD */
+.leaderboard table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th,td{
+padding:14px;
+text-align:left;
+border-bottom:1px solid #eef1ef;
+}
+
+.you{
+background:#eef5f1;
+border-radius:10px;
+}
+
+.you span{
+color:var(--green);
+font-size:12px;
+}
+
+/* CERTIFICATE */
+.certificate p{
+margin:10px 0 18px;
+color:#667b74;
+}
+
+.generate{
+background:linear-gradient(90deg,var(--green),var(--blue));
+border:none;
+padding:12px 18px;
+border-radius:10px;
+color:#fff;
+display:flex;
+gap:8px;
+align-items:center;
+cursor:pointer;
+transition:.25s;
+}
+
+.generate:hover{
+transform:translateY(-2px);
+}
+/* CLAIM BUTTON */
+
+.claimBtn{
+margin-top:15px;
+padding:10px 16px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,var(--green),var(--blue));
+color:white;
+cursor:pointer;
+font-size:14px;
+}
+
+/* CALENDAR */
+
+.day.today{
+background:#ff5252;
+color:white;
+border-radius:50%;
+}
+
+.day.past{
+cursor:pointer;
+}
+
+.day.future{
+opacity:0.4;
+cursor:default;
+}
+
+/* LEADERBOARD HEADER */
+
+.leaderHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+#leaderFilter{
+padding:8px 10px;
+border-radius:8px;
+border:1px solid #d9e4df;
+}
+/* LEETCODE DOT */
+
+.day{
+position:relative;
+}
+
+.dot{
+width:6px;
+height:6px;
+background:#2e7d32;
+border-radius:50%;
+position:absolute;
+bottom:4px;
+right:4px;
+}
+
+.today{
+background:#ff5252;
+color:white;
+border-radius:50%;
+}
+
+.past{
+cursor:pointer;
+}
+
+.future{
+opacity:0.4;
+cursor:default;
+}
