@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EcoCommit AI</title>
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<!-- ── CURSOR ── -->
+<div id="eco-cursor">🌿</div>
+<canvas id="trail-canvas"></canvas>
+
+<!-- ── SCROLL PROGRESS ── -->
+<div id="scroll-progress"></div>
+
+<!-- ── CO₂ LIVE TICKER ── -->
+<div id="co2-ticker">
+  <span class="ticker-dot"></span>
+  <span>🌍 Live CO₂ saved today: </span>
+  <span id="ticker-val">48,320</span>
+  <span> kg</span>
+</div>
+
+<!-- ── AMBIENT GLOW ORBS ── -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- ── BREATHING BG ── -->
+<div id="breathe-bg"></div>
+
+<!-- ── CONFETTI ── -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ── PAGE CURTAIN ── -->
+<div id="page-curtain"></div>
+
+<!-- ── LIVE ACTIVITY FEED ── -->
+<div id="activity-feed"></div>
+
+<div id="navbar-container"></div>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="heroSection">
+
+  <div class="heroLeft">
+
+    <!-- Badge with pulse ring -->
+    <div class="badge-wrap">
+      <span class="badge-ring"></span>
+      <span class="badge">✨ AI-Powered Climate Action</span>
+    </div>
+
+    <h1 id="hero-h1">
+      <span class="split-word" id="word1">Turn</span>
+      <span class="split-word" id="word2">Daily</span><br>
+      <span class="split-word" id="word3">Habits</span>
+      <span class="split-word" id="word4">Into</span><br>
+      <span id="typewriter-wrap">
+        <span id="typewriter-text"></span><span class="tw-cursor">|</span>
+      </span>
+    </h1>
+
+    <p class="hero-sub">Track your carbon footprint, earn rewards for sustainable choices, and join a global community making a measurable difference.</p>
+
+    <div class="heroBtns">
+      <button class="primary magnetic" id="startTrackingBtn">Start Tracking →</button>
+      <button class="secondary magnetic" onclick="window.location.href='map.html'">View Map</button>
+    </div>
+
+    <!-- ══ STATS — REDESIGNED ══ -->
+    <div class="stats" id="statsSection">
+
+      <div class="stat-card" style="--delay:0.0s">
+        <div class="stat-ring-wrap">
+          <svg class="stat-ring-svg" viewBox="0 0 72 72">
+            <circle class="stat-ring-bg"   cx="36" cy="36" r="30"/>
+            <circle class="stat-ring-fill" cx="36" cy="36" r="30"
+              data-pct="78"
+              stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+          </svg>
+          <span class="stat-icon">🌿</span>
+        </div>
+        <div class="stat-body">
+          <div class="stat-number-wrap">
+            <span class="stat-number odometer" data-target="1240" data-suffix="+">0</span>
+          </div>
+          <span class="stat-label">Tons CO₂ Saved</span>
+          <span class="stat-sub">vs 320 global avg</span>
+        </div>
+      </div>
+
+      <div class="stat-card" style="--delay:0.15s">
+        <div class="stat-ring-wrap">
+          <svg class="stat-ring-svg" viewBox="0 0 72 72">
+            <circle class="stat-ring-bg"   cx="36" cy="36" r="30"/>
+            <circle class="stat-ring-fill" cx="36" cy="36" r="30"
+              data-pct="91"
+              stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+          </svg>
+          <span class="stat-icon">👥</span>
+        </div>
+        <div class="stat-body">
+          <div class="stat-number-wrap">
+            <span class="stat-number odometer" data-target="18500" data-suffix="+">0</span>
+          </div>
+          <span class="stat-label">Active Users</span>
+          <span class="stat-sub">top 9% worldwide</span>
+        </div>
+      </div>
+
+      <div class="stat-card" style="--delay:0.30s">
+        <div class="stat-ring-wrap">
+          <svg class="stat-ring-svg" viewBox="0 0 72 72">
+            <circle class="stat-ring-bg"   cx="36" cy="36" r="30"/>
+            <circle class="stat-ring-fill" cx="36" cy="36" r="30"
+              data-pct="55"
+              stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+          </svg>
+          <span class="stat-icon">🏙️</span>
+        </div>
+        <div class="stat-body">
+          <div class="stat-number-wrap">
+            <span class="stat-number odometer" data-target="142" data-suffix="+">0</span>
+          </div>
+          <span class="stat-label">Cities</span>
+          <span class="stat-sub">across 38 countries</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- /stats -->
+
+  </div>
+
+  <!-- Globe with location pings + floating stat cards -->
+  <div class="heroRight">
+    <div class="globe-scene" id="globeScene">
+
+      <div class="float-card float-card-1">
+        <span class="float-card-icon">🚲</span>
+        <div>
+          <div class="float-card-val">2.4kg</div>
+          <div class="float-card-lbl">CO₂ saved today</div>
+        </div>
+      </div>
+      <div class="float-card float-card-2">
+        <span class="float-card-icon">⚡</span>
+        <div>
+          <div class="float-card-val">+124</div>
+          <div class="float-card-lbl">EcoCoins earned</div>
+        </div>
+      </div>
+      <div class="float-card float-card-3">
+        <span class="float-card-icon">🏆</span>
+        <div>
+          <div class="float-card-val">#3</div>
+          <div class="float-card-lbl">City leaderboard</div>
+        </div>
+      </div>
+
+      <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+      <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
+
+      <div class="globe-ping ping-1"></div>
+      <div class="globe-ping ping-2"></div>
+      <div class="globe-ping ping-3"></div>
+      <div class="globe-ping ping-4"></div>
+      <div class="globe-ping ping-5"></div>
+
+      <div class="globe-wrap" id="globeWrap">
+        <img src="image.png" class="earth-img" alt="Earth">
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════ HOW IT WORKS ════ -->
+<section class="how">
+  <div class="section-header" id="howHeader">
+    <span class="section-label" data-scramble="Process">Process</span>
+    <h2 class="char-reveal" data-text="How It Works">How It Works</h2>
+    <div class="heading-highlight-bar"></div>
+    <p class="sub">Four simple steps to start making a real environmental impact</p>
+  </div>
+  <div class="steps">
+    <svg class="steps-connector" id="stepsConnector" preserveAspectRatio="none">
+      <line x1="0" y1="1" x2="100%" y2="1"/>
+    </svg>
+    <div class="step reveal reveal-delay-1">
+      <div class="step-inner">
+        <div class="step-front">
+          <span class="step-number">01</span>
+          <div class="step-icon-wrap"><i data-lucide="leaf"></i></div>
+          <h4>Track Action</h4>
+          <p>Log your eco-friendly activities daily</p>
+        </div>
+        <div class="step-back">
+          <div class="back-icon">🌱</div>
+          <h4>Track Action</h4>
+          <p>Walk, cycle, or take public transport — every action counts toward your eco score.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-inner">
+        <div class="step-front">
+          <span class="step-number">02</span>
+          <div class="step-icon-wrap"><i data-lucide="brain"></i></div>
+          <h4>AI Analysis</h4>
+          <p>Our AI calculates your carbon impact</p>
+        </div>
+        <div class="step-back">
+          <div class="back-icon">🤖</div>
+          <h4>AI Analysis</h4>
+          <p>Our model computes exact CO₂ saved based on distance, mode, and local grid data.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-inner">
+        <div class="step-front">
+          <span class="step-number">03</span>
+          <div class="step-icon-wrap"><i data-lucide="line-chart"></i></div>
+          <h4>See Impact</h4>
+          <p>Visualize your environmental savings</p>
+        </div>
+        <div class="step-back">
+          <div class="back-icon">📊</div>
+          <h4>See Impact</h4>
+          <p>Beautiful dashboards show your cumulative savings compared to city averages.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step reveal reveal-delay-4">
+      <div class="step-inner">
+        <div class="step-front">
+          <span class="step-number">04</span>
+          <div class="step-icon-wrap"><i data-lucide="trophy"></i></div>
+          <h4>Earn Rewards</h4>
+          <p>Get badges and climb leaderboard</p>
+        </div>
+        <div class="step-back">
+          <div class="back-icon">🏆</div>
+          <h4>Earn Rewards</h4>
+          <p>Redeem EcoCoins with partner brands and NGOs for real-world rewards.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FEATURES ════ -->
+<section class="features">
+  <div class="section-header" id="featuresHeader">
+    <span class="section-label" data-scramble="Capabilities">Capabilities</span>
+    <h2 class="char-reveal" data-text="Powerful Features">Powerful Features</h2>
+    <div class="heading-highlight-bar"></div>
+    <p class="sub">Everything you need to track and offset your carbon footprint</p>
+  </div>
+  <div class="featureGrid">
+    <div class="feature grid-item" data-dir="left">
+      <div class="spotlight"></div>
+      <div class="feature-icon-wrap"><i data-lucide="map"></i></div>
+      <h4>Transport Tracking</h4>
+      <p>Track walking, cycling, bus rides and measure carbon savings.</p>
+    </div>
+    <div class="feature grid-item" data-dir="right">
+      <div class="spotlight"></div>
+      <div class="feature-icon-wrap"><i data-lucide="cpu"></i></div>
+      <h4>AI Carbon Calculator</h4>
+      <p>AI predicts environmental impact with precision.</p>
+    </div>
+    <div class="feature grid-item" data-dir="left">
+      <div class="spotlight"></div>
+      <div class="feature-icon-wrap"><i data-lucide="trending-up"></i></div>
+      <h4>Impact Prediction</h4>
+      <p>See how habits shape the planet's future.</p>
+    </div>
+    <div class="feature grid-item" data-dir="right">
+      <div class="spotlight"></div>
+      <div class="feature-icon-wrap"><i data-lucide="shield-check"></i></div>
+      <h4>Verified Certificates</h4>
+      <p>Earn blockchain-verified climate certificates.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA ════ -->
+<section class="cta reveal">
+  <h2>Ready to Make a Difference?</h2>
+  <p>Join thousands tracking their climate impact and earning rewards.</p>
+  <button id="getStartedBtn" class="magnetic">Get Started Free →</button>
+</section>
+
+<footer>EcoCommit AI © 2026 — Building a sustainable future.</footer>
+
+<script src="home.js"></script>
+<script src="navbar.js"></script>
+</body>
+</html>
