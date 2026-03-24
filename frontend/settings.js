@@ -1,8 +1,7 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", async function(){
 
-    const isLoggedIn = localStorage.getItem("ecoUser") === "true";
-
-    if(!isLoggedIn){
+    // ── Auth guard (token-based) ──
+    if (!isLoggedIn()) {
         window.location.href = "login.html";
         return;
     }
@@ -11,26 +10,53 @@ document.addEventListener("DOMContentLoaded", function(){
     const emailInput = document.querySelector("input[type='email']");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    // Load current user data
-    const storedName = localStorage.getItem("ecoName");
-    const storedEmail = localStorage.getItem("ecoEmail");
+    // ── Load user data from API, fallback to cache ──
+    try {
+        const user = await fetchCurrentUser();
+        if (nameInput) nameInput.value = user.name || "";
+        if (emailInput) emailInput.value = user.email || "";
 
-    if(storedName) nameInput.value = storedName;
-    if(storedEmail) emailInput.value = storedEmail;
+        // Update cache
+        localStorage.setItem("ecoName", user.name);
+        localStorage.setItem("ecoEmail", user.email);
 
-    // Auto-save when changed
-    nameInput.addEventListener("change", function(){
-        localStorage.setItem("ecoName", nameInput.value.trim());
-    });
+    } catch(err) {
+        console.warn("Settings: API fallback to localStorage", err);
 
-    emailInput.addEventListener("change", function(){
-        localStorage.setItem("ecoEmail", emailInput.value.trim());
-    });
+        const storedName = localStorage.getItem("ecoName");
+        const storedEmail = localStorage.getItem("ecoEmail");
 
-    // Logout
-    logoutBtn?.addEventListener("click", function(){
-        localStorage.removeItem("ecoUser");
-        window.location.href = "home.html";
-    });
+        if (storedName && nameInput) nameInput.value = storedName;
+        if (storedEmail && emailInput) emailInput.value = storedEmail;
+    }
+
+    // Auto-save when changed (updates localStorage cache)
+    if (nameInput) {
+        nameInput.addEventListener("change", function(){
+            localStorage.setItem("ecoName", nameInput.value.trim());
+        });
+    }
+
+    if (emailInput) {
+        emailInput.addEventListener("change", function(){
+            localStorage.setItem("ecoEmail", emailInput.value.trim());
+        });
+    }
+
+    // ── Logout ──
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function(){
+            // Clear all auth data
+            removeToken();
+            localStorage.removeItem("ecoUser");
+            localStorage.removeItem("ecoName");
+            localStorage.removeItem("ecoEmail");
+            localStorage.removeItem("ecoCountry");
+            localStorage.removeItem("ecoCity");
+            localStorage.removeItem("ecoPoints");
+
+            window.location.href = "home.html";
+        });
+    }
 
 });
