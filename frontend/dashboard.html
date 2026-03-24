@@ -8,6 +8,7 @@
 
 <link rel="stylesheet" href="dashboard.css">
 <link rel="stylesheet" href="navbar.css">
+<link rel="stylesheet" href="toast.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -30,31 +31,31 @@
 <div class="stat">
 <i data-lucide="trending-down"></i>
 <span>Daily CO₂ Saved</span>
-<h2 class="count" data-target="2.4" data-suffix=" kg">0</h2>
+<h2 class="count" id="statDailyCO2" data-target="0" data-suffix=" kg">0</h2>
 </div>
 
 <div class="stat">
 <i data-lucide="leaf"></i>
 <span>Monthly CO₂ Saved</span>
-<h2 class="count" data-target="48.2" data-suffix=" kg">0</h2>
+<h2 class="count" id="statMonthlyCO2" data-target="0" data-suffix=" kg">0</h2>
 </div>
 
 <div class="stat">
 <i data-lucide="tree-pine"></i>
 <span>Trees Equivalent</span>
-<h2 class="count" data-target="12">0</h2>
+<h2 class="count" id="statTrees" data-target="0">0</h2>
 </div>
 
 <div class="stat">
 <i data-lucide="dollar-sign"></i>
 <span>Money Saved</span>
-<h2 class="count" data-target="386" data-prefix="$">0</h2>
+<h2 class="count" id="statMoney" data-target="0" data-prefix="$">0</h2>
 </div>
 
 <div class="stat">
 <i data-lucide="star"></i>
 <span>EcoPoints</span>
-<h2 class="count" data-target="2540">0</h2>
+<h2 class="count" id="statEcoPoints" data-target="0">0</h2>
 </div>
 
 </section>
@@ -113,9 +114,8 @@ No-AC Day Pledge
 <li>Recommendation Engine <span class="done">✓ Complete</span></li>
 </ul>
 
-<div class="aiBox">
-Switching to bus twice a week can reduce your yearly emissions by 18%.
-Your walking habit already saves ~2.1 kg CO₂ daily.
+<div class="aiBox" id="aiRecommendationBox">
+Loading AI recommendations...
 </div>
 
 </div>
@@ -159,17 +159,17 @@ Real-time projected impact based on platform data
 <div class="futureCards">
 
 <div class="fCard green">
-<h2 id="co2">29</h2>
+<h2 id="co2">--</h2>
 <span>Tons CO₂ Reduced / Year</span>
 </div>
 
 <div class="fCard blue">
-<h2 id="aqi">3</h2>
+<h2 id="aqi">--</h2>
 <span>AQI Points Improved</span>
 </div>
 
 <div class="fCard gold">
-<h2 id="fuel">$13,872</h2>
+<h2 id="fuel">--</h2>
 <span>Fuel Savings</span>
 </div>
 
@@ -179,6 +179,8 @@ Real-time projected impact based on platform data
 
 </main>
 
+<script src="toast.js"></script>
+<script src="api.js"></script>
 <script src="dashboard.js"></script>
 <script src="navbar.js"></script>
 
