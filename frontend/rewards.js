@@ -1,23 +1,49 @@
 lucide.createIcons();
 
-/* ECOPOINT COUNT */
+// ── Auth guard ──
+if (typeof isLoggedIn === "function" && !isLoggedIn()) {
+    window.location.href = "login.html";
+}
+
+/* ============================
+   ECOPOINT COUNT (from API)
+============================ */
 const points = document.getElementById("points");
-let target = 2540;
-let start = 0;
 
-function animate(){
-start += 40;
+async function loadEcoPoints() {
+    try {
+        const user = await fetchCurrentUser();
+        const target = user.eco_points || 0;
+        animatePoints(target);
 
-points.textContent = start;
-
-if(start < target){
-requestAnimationFrame(animate);
-}else{
-points.textContent = target;
+        // Update cached points
+        localStorage.setItem("ecoPoints", target);
+    } catch(e) {
+        console.warn("EcoPoints fallback:", e);
+        const cached = parseInt(localStorage.getItem("ecoPoints")) || 0;
+        animatePoints(cached);
+    }
 }
+
+function animatePoints(target) {
+    let start = 0;
+    const step = Math.max(1, Math.floor(target / 60));
+
+    function animate() {
+        start += step;
+
+        if (start < target) {
+            points.textContent = start;
+            requestAnimationFrame(animate);
+        } else {
+            points.textContent = target;
+        }
+    }
+
+    animate();
 }
 
-animate();
+loadEcoPoints();
 
 
 /* =========================
@@ -33,7 +59,7 @@ const year = today.getFullYear();
 
 const daysInMonth = new Date(year,month+1,0).getDate();
 
-/* Example activity data */
+/* Example activity data (could be fetched later) */
 const activityDays = [2,4,7,9,10,14,18];
 
 for(let i=1;i<=daysInMonth;i++){
@@ -84,10 +110,11 @@ calendar.appendChild(day);
 
 
 /* =========================
-   LEADERBOARD DATA
+   LEADERBOARD DATA (API + Fallback)
 ========================= */
 
-const leaderboardData = {
+// Hardcoded fallback data
+const fallbackLeaderboard = {
 
 city:[
 {rank:"🥇",user:"Priya S.",place:"Mumbai",points:"4,200"},
@@ -124,7 +151,6 @@ global:[
 };
 
 
-
 /* =========================
    LEADERBOARD SWITCHER
 ========================= */
@@ -134,11 +160,47 @@ const tableBody=document.getElementById("leaderboardBody");
 const header=document.getElementById("locationHeader");
 
 
-function renderLeaderboard(type){
+async function renderLeaderboard(type){
 
 tableBody.innerHTML="";
 
-leaderboardData[type].forEach(row=>{
+let data = null;
+
+// Try API first
+try {
+    const userCity = localStorage.getItem("ecoCity") || "Unknown";
+    const userState = localStorage.getItem("ecoState") || "Unknown";
+    const userCountry = localStorage.getItem("ecoCountry") || "Unknown";
+
+    let value = userCity;
+    if (type === "state") value = userState;
+    if (type === "country") value = userCountry;
+    if (type === "global") value = "global";
+
+    const apiData = await fetchLeaderboard(type, value);
+
+    if (Array.isArray(apiData) && apiData.length > 0) {
+        // Transform API data to display format
+        data = apiData.map((row, i) => {
+            const rank = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : String(i + 1);
+            return {
+                rank: rank,
+                user: row.name || row.user || "User",
+                place: row.city || row.place || "",
+                points: (row.eco_points || row.points || 0).toLocaleString()
+            };
+        });
+    }
+} catch(e) {
+    console.warn("Leaderboard API fallback:", e);
+}
+
+// Fallback to hardcoded data
+if (!data || data.length === 0) {
+    data = fallbackLeaderboard[type] || [];
+}
+
+data.forEach(row=>{
 
 let tr=document.createElement("tr");
 
