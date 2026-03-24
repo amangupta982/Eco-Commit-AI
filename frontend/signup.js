@@ -149,7 +149,10 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 
-    signupBtn.addEventListener("click", function(){
+    // ─────────────────────────────────────
+    //  SIGNUP — calls POST /auth/register
+    // ─────────────────────────────────────
+    signupBtn.addEventListener("click", async function(){
 
         const fullName = document.getElementById("fullName").value.trim();
         const email = document.getElementById("email").value.trim();
@@ -157,24 +160,68 @@ document.addEventListener("DOMContentLoaded", function(){
         const confirmPassword = document.getElementById("confirmPassword").value;
         const country = countryInput.value.trim();
         const city = cityInput.value.trim();
+        const state = document.getElementById("state").value.trim();
+        const campus = document.getElementById("campus").value.trim();
 
+        // ── Client-side validation ──
         if(!fullName || !email || !password || !confirmPassword || !country || !city){
-            alert("Please fill all fields");
+            showToast("Please fill all required fields", "error");
             return;
         }
 
         if(password !== confirmPassword){
-            alert("Passwords do not match");
+            showToast("Passwords do not match", "error");
             return;
         }
 
-        localStorage.setItem("ecoUser", "true");
-        localStorage.setItem("ecoName", fullName);
-        localStorage.setItem("ecoEmail", email);
-        localStorage.setItem("ecoCountry", country);
-        localStorage.setItem("ecoCity", city);
+        if(password.length < 6){
+            showToast("Password must be at least 6 characters", "error");
+            return;
+        }
 
-        window.location.href = "dashboard.html";
+        // ── Disable button while loading ──
+        signupBtn.disabled = true;
+        signupBtn.textContent = "Creating Account...";
+
+        try {
+            // 1. Register the user
+            await registerUser({
+                name: fullName,
+                email: email,
+                password: password,
+                campus: campus || "Unknown",
+                city: city,
+                state: state || "Unknown",
+                country: country
+            });
+
+            // 2. Auto-login after registration
+            const loginData = await loginUser(email, password);
+            setToken(loginData.access_token);
+
+            // 3. Fetch user info and cache it
+            const user = await fetchCurrentUser();
+            localStorage.setItem("ecoUser", "true");
+            localStorage.setItem("ecoName", user.name);
+            localStorage.setItem("ecoEmail", user.email);
+            localStorage.setItem("ecoCountry", user.country || "");
+            localStorage.setItem("ecoCity", user.city || "");
+            localStorage.setItem("ecoPoints", user.eco_points || 0);
+
+            showToast("Account created successfully! 🎉", "success");
+
+            // 4. Redirect to dashboard after brief delay
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 1000);
+
+        } catch(err) {
+            console.error("Signup error:", err);
+            showToast(err.detail || "Registration failed. Please try again.", "error");
+
+            signupBtn.disabled = false;
+            signupBtn.textContent = "Create Account";
+        }
     });
 
 });
