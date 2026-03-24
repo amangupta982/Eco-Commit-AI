@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function initializeNavbar() {
 
-  const isLoggedIn  = localStorage.getItem("ecoUser") === "true";
+  const isLoggedInCheck = typeof isLoggedIn === "function" ? isLoggedIn() : localStorage.getItem("ecoUser") === "true";
   const currentPage = window.location.pathname.split("/").pop() || "home.html";
   const navbar      = document.getElementById("mainNavbar");
   const navLinks    = document.getElementById("nav-links");
@@ -53,7 +53,7 @@ function initializeNavbar() {
   // ═══════════════════════════════════════
   // NOT LOGGED IN — Sign In + Sign Up
   // ═══════════════════════════════════════
-  if (!isLoggedIn) {
+  if (!isLoggedInCheck) {
     if (authSection) {
       authSection.innerHTML = `
         <button class="sign-in-btn" id="goLogin">Sign In</button>
@@ -70,7 +70,7 @@ function initializeNavbar() {
   }
 
   // ═══════════════════════════════════════
-  // LOGGED IN — Nav links + user chip
+  // LOGGED IN — Nav links + user chip (isLoggedInCheck = true)
   // ═══════════════════════════════════════
 
   // Nav page definitions
