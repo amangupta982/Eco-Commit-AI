@@ -11,7 +11,7 @@ from routes.dashboard_routes import router as dashboard_router
 from routes.ai_routes import router as ai_router
 from routes.leaderboard_routes import router as leaderboard_router
 from routes.platform_routes import router as platform_router
-from routes import ai_routes
+
 
 app = FastAPI(
     title="EcoCommit AI API",
