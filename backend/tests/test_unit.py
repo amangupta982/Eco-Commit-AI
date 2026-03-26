@@ -5,10 +5,11 @@ No database or HTTP server needed.
 
 import os
 import sys
+import pytest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 os.environ.setdefault("DATABASE_URL", "sqlite:///./test.db")
-os.environ.setdefault("SECRET_KEY", "test-secret-key-12345")
+os.environ.setdefault("SECRET_KEY", "ci-test-secret-key-12345")
 
 
 # ─────────────────────────────────────
@@ -75,9 +76,9 @@ class TestSimulationService:
     def test_simulate_100_users(self):
         from services.simulation_service import simulate_future
         result = simulate_future(100)
-        assert result["co2_reduced"] == 2.4
-        assert result["aqi_improvement"] == 0.3
-        assert result["fuel_savings"] == 1200
+        assert result["co2_reduced"] == pytest.approx(2.4)
+        assert result["aqi_improvement"] == pytest.approx(0.3)
+        assert result["fuel_savings"] == pytest.approx(1200)
 
     def test_simulate_zero_users(self):
         from services.simulation_service import simulate_future
@@ -89,14 +90,14 @@ class TestSimulationService:
     def test_simulate_one_user(self):
         from services.simulation_service import simulate_future
         result = simulate_future(1)
-        assert result["co2_reduced"] == 0.02
+        assert result["co2_reduced"] == pytest.approx(0.02)
         assert result["fuel_savings"] == 12
 
     def test_simulate_large_scale(self):
         from services.simulation_service import simulate_future
         result = simulate_future(10000)
-        assert result["co2_reduced"] == 240.0
-        assert result["fuel_savings"] == 120000
+        assert result["co2_reduced"] == pytest.approx(240.0)
+        assert result["fuel_savings"] == pytest.approx(120000)
 
 
 # ─────────────────────────────────────

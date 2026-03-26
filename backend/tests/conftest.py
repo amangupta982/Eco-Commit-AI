@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 # ── Override DATABASE_URL BEFORE importing app modules ──
 os.environ["DATABASE_URL"] = "sqlite:///./test.db"
-os.environ["SECRET_KEY"] = "test-secret-key-12345"
+os.environ["SECRET_KEY"] = "ci-test-secret-key-12345"
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
