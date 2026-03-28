@@ -9,12 +9,13 @@ on:
 jobs:
 
   # ─────────────────────────────────────────────
-  #  Backend Tests (Python + SQLite in-memory)
+  #  Backend Tests (Python + SQLite)
   # ─────────────────────────────────────────────
   backend-tests:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.10", "3.11"]
 
@@ -25,6 +26,7 @@ jobs:
     env:
       DATABASE_URL: "sqlite:///./test.db"
       SECRET_KEY: "ci-test-secret-key-12345"
+      PYTHONPATH: "."
 
     steps:
 
@@ -54,6 +56,15 @@ jobs:
               print('NLTK data downloaded')
           except ImportError:
               print('NLTK not installed, skipping')
+          "
+
+      - name: Verify dependency versions
+        run: |
+          python -c "
+          import bcrypt; print(f'bcrypt: {bcrypt.__version__}')
+          import passlib; print(f'passlib: {passlib.__version__}')
+          import sqlalchemy; print(f'sqlalchemy: {sqlalchemy.__version__}')
+          import fastapi; print(f'fastapi: {fastapi.__version__}')
           "
 
       - name: Run all tests with summary

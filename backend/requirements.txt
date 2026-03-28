@@ -1,7 +1,6 @@
 # ── Core Framework ──
 fastapi>=0.128.0
 uvicorn>=0.30.0
-starlette>=0.37.0
 
 # ── Database ──
 SQLAlchemy>=2.0.0
@@ -10,12 +9,11 @@ psycopg2-binary>=2.9.0
 # ── Auth & Security ──
 python-jose[cryptography]>=3.3.0
 passlib[bcrypt]>=1.7.4
-bcrypt>=4.0.0
+bcrypt>=4.0.0,<5.0.0
 python-multipart>=0.0.9
 
 # ── Validation ──
-pydantic>=2.0.0
-pydantic[email]
+pydantic[email]>=2.0.0
 email-validator>=2.0.0
 
 # ── Config ──
