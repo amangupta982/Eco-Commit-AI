@@ -66,6 +66,34 @@ class TestCarbonCalculator:
         carbon2, _ = calculate_carbon("WALK")
         assert carbon1 == carbon2 == 1.0
 
+    def test_empty_string_returns_default(self):
+        """Empty activity type should return default values."""
+        from services.carbon_calculator import calculate_carbon
+        carbon, points = calculate_carbon("")
+        assert carbon == 0.5
+        assert points == 5
+
+    def test_eco_points_always_10x_carbon(self):
+        """Eco points should always be exactly 10 × carbon_saved (as int)."""
+        from services.carbon_calculator import calculate_carbon
+        known_activities = [
+            "walk", "public transport", "cycled",
+            "avoided ac", "planted tree", "carpool", "unknown_xyz"
+        ]
+        for activity in known_activities:
+            carbon, points = calculate_carbon(activity)
+            assert points == int(carbon * 10), \
+                f"{activity}: points={points} != int({carbon}*10)={int(carbon * 10)}"
+
+    def test_all_known_activities_return_positive(self):
+        """All known activities should return carbon > 0 and points > 0."""
+        from services.carbon_calculator import calculate_carbon
+        known = ["walk", "public transport", "cycled", "avoided ac", "planted tree", "carpool"]
+        for activity in known:
+            carbon, points = calculate_carbon(activity)
+            assert carbon > 0, f"{activity} returned carbon={carbon}"
+            assert points > 0, f"{activity} returned points={points}"
+
 
 # ─────────────────────────────────────
 #  Simulation Service
